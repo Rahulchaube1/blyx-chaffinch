@@ -1,0 +1,50 @@
+use sortruns;
+use mergecounts;
+
+fn chaffinch_num(value: i64) -> f64 {
+    at([value], 0)
+}
+
+fn chaffinch_finite(values: vector) -> bool {
+    let mut i = 0;
+    while i < len(values) {
+        let value = at(values, i);
+        if !(value - value == 0.0) {
+            return false;
+        }
+        i += 1;
+    }
+    true
+}
+
+fn chaffinch_integers(values: vector) -> bool {
+    let mut i = 0;
+    while i < len(values) {
+        let value = at(values, i);
+        if !(value >= -9007199254740991.0 && value <= 9007199254740991.0 && value % 1.0 == 0.0) {
+            return false;
+        }
+        i += 1;
+    }
+    true
+}
+
+fn chaffinch_compute(old: vector, fresh: vector) -> vector {
+    let previous = sortruns_profile(old);
+    let current = sortruns_profile(fresh);
+    let merged = mergecounts_sets(old, fresh);
+    if len(previous) == 0 || len(current) == 0 || len(merged) == 0 {
+        return [];
+    }
+    [at(merged, 2), at(merged, 1), at(merged, 0), chaffinch_num(len(fresh)) - at(current, 0)]
+}
+
+// Reconcile sorted collection snapshots without materializing their union.
+// Returns [added unique keys, removed unique keys, retained keys, duplicate occurrences in the new snapshot]. Inputs are sorted, allowing forward-only scans.
+pub fn chaffinch_reconcile(old: vector, fresh: vector) -> vector {
+    if !chaffinch_integers(old) { return []; }
+    if !chaffinch_integers(fresh) { return []; }
+    let result = chaffinch_compute(old, fresh);
+    if !chaffinch_finite(result) { return []; }
+    result
+}

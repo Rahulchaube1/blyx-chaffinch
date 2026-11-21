@@ -1,0 +1,29 @@
+use std::cli;
+use console;
+use chaffinch;
+
+fn main() {
+    let argv = cli_args();
+    let count = args_len(argv);
+    if count == 1 && args_at(argv, 0) == "--help" {
+        println!("Reconcile sorted collection snapshots without materializing their union.");
+        println!("Usage: chaffinch old fresh");
+        println!("Vector arguments are comma-separated; use [] for an empty vector.");
+        return;
+    }
+    let mut result = [];
+    if count == 0 {
+        result = chaffinch_reconcile([1, 1, 2, 4], [2, 2, 3, 4]);
+    } else {
+        if count != 2 { stderr_line("Wrong argument count. Use --help."); process_exit(2); }
+        let old = console_vector(args_at(argv, 0));
+        let fresh = console_vector(args_at(argv, 1));
+        result = chaffinch_reconcile(old, fresh);
+    }
+    if len(result) == 0 { stderr_line("Invalid input for Chaffinch. See the package input contract."); process_exit(1); }
+    let mut i = 0;
+    while i < len(result) {
+        println!(at(result, i));
+        i += 1;
+    }
+}

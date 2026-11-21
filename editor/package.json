@@ -1,0 +1,57 @@
+{
+  "name": "blyx-chaffinch",
+  "displayName": "Blyx Chaffinch",
+  "description": "Reconcile sorted collection snapshots without materializing their union.",
+  "version": "0.1.0",
+  "publisher": "RahulChaube",
+  "license": "(MIT OR Apache-2.0)",
+  "icon": "logo.png",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "keywords": [
+    "blyx",
+    "chaffinch",
+    "framework"
+  ],
+  "homepage": "https://www.blyx-lang.space/packages/chaffinch",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Rahulchaube1/blyx-chaffinch.git",
+    "directory": "editor"
+  },
+  "bugs": {
+    "url": "https://github.com/Rahulchaube1/blyx-chaffinch/issues"
+  },
+  "extensionDependencies": [
+    "RahulChaube.blyx-language"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "blyx",
+        "path": "./snippets/framework.json"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "chaffinch.start",
+        "title": "Get started with Chaffinch",
+        "description": "Reconcile sorted collection snapshots without materializing their union.",
+        "steps": [
+          {
+            "id": "run",
+            "title": "Run the Chaffinch example",
+            "description": "Create an empty .blyx file, insert blyx-chaffinch-demo and choose **Blyx: Run File**.\n[Open the documentation](https://www.blyx-lang.space/packages/chaffinch)",
+            "media": {
+              "markdown": "walkthrough.md"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
