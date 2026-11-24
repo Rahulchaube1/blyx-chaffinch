@@ -6,16 +6,20 @@ Reconcile sorted collection snapshots without materializing their union. This Bl
 
 A duplicate row should not look like a newly added key. Compare distinct sets and report repeated occurrences separately. [Python, grouping consecutive keys](https://docs.python.org/3/library/itertools.html#itertools.groupby)
 
+## Reduce sparse worker gradients
+
+Merge sorted sparse gradient sums from two workers, coalesce duplicate coordinates and normalize by the global example count. [Commands and worked example](https://github.com/Rahulchaube1/blyx-chaffinch/blob/v0.2.0/SCALE.md) · [Measurements and source data](https://www.blyx-lang.space/articles/training-in-factors)
+
 ## Editor extension
 
-Install **RahulChaube.blyx-chaffinch** to run the worked example and use the framework’s function completions in a Blyx file. Open an empty `.blyx` file, enter `blyx-chaffinch-demo`, then choose **Blyx: Run File**. [Editor downloads](https://www.blyx-lang.space/packages/chaffinch#editor) · [Download the extension](https://github.com/Rahulchaube1/blyxxxx/releases/download/framework-editors-v0.1.0/blyx-chaffinch-0.1.0.vsix) · [Starter with framework source](https://github.com/Rahulchaube1/blyxxxx/releases/download/framework-editors-v0.1.0/blyx-chaffinch-starter-0.1.0.zip)
+Install **RahulChaube.blyx-chaffinch** to run the worked example and use the framework’s function completions in a Blyx file. Open an empty `.blyx` file, enter `blyx-chaffinch-demo`, then choose **Blyx: Run File**. [Editor downloads](https://www.blyx-lang.space/packages/chaffinch#editor) · [Download the extension](https://github.com/Rahulchaube1/blyx-chaffinch/releases/download/v0.2.0/blyx-chaffinch-0.2.0.vsix) · [Starter with framework source](https://github.com/Rahulchaube1/blyx-chaffinch/releases/download/v0.2.0/blyx-chaffinch-starter-0.2.0.zip)
 
 ## Install and run
 
 Install [Blyx 0.2.1](https://www.blyx-lang.space/download) with a Rust toolchain and host linker for native builds.
 
 ```sh
-git clone --depth 1 --branch v0.1.0 https://github.com/Rahulchaube1/blyx-chaffinch.git
+git clone --depth 1 --branch v0.2.0 https://github.com/Rahulchaube1/blyx-chaffinch.git
 cd blyx-chaffinch
 blyxc native-run example.blyx
 blyxc native-run tests.blyx
@@ -28,7 +32,7 @@ blyxc native-run tests.blyx
 Run this in the directory containing your application's entry file.
 
 ```sh
-git clone --depth 1 --branch v0.1.0 https://github.com/Rahulchaube1/blyx-chaffinch.git vendor/chaffinch
+git clone --depth 1 --branch v0.2.0 https://github.com/Rahulchaube1/blyx-chaffinch.git vendor/chaffinch
 ```
 
 ```blyx

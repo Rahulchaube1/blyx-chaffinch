@@ -1,12 +1,15 @@
 use std::cli;
 use console;
+use scale_cli;
 use chaffinch;
 
 fn main() {
     let argv = cli_args();
+    if scale_command(argv) { return; }
     let count = args_len(argv);
     if count == 1 && args_at(argv, 0) == "--help" {
         println!("Reconcile sorted collection snapshots without materializing their union.");
+        println!("reduce EXAMPLES WORKER_A.csv WORKER_B.csv");
         println!("Usage: chaffinch old fresh");
         println!("Vector arguments are comma-separated; use [] for an empty vector.");
         return;

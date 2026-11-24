@@ -1,0 +1,47 @@
+use std::buffer;
+
+// Inputs interleave (coordinate, summed gradient) in nondecreasing key order.
+// Coordinates are exactly representable integers. Repeated keys are legal.
+fn ch_magnitude(v: f64) -> f64 { if v < 0.0 { return -v; } v }
+fn ch_grad_valid(pairs: vector) -> bool {
+    if len(pairs)%2 != 0 { return false; }
+    let mut last = -1.0;
+    let mut i = 0;
+    while i < len(pairs) {
+        let key = at(pairs,i); let g = at(pairs,i+1);
+        if !(key >= 0.0 && key <= 9007199254740991.0 && key%1.0 == 0.0 && key >= last && g-g == 0.0) { return false; }
+        last = key; i += 2;
+    }
+    true
+}
+pub fn chaffinch_gradient_mean(a: vector, b: vector, examples: i64) -> vector {
+    if examples <= 0 || examples > 9007199254740991 || !ch_grad_valid(a) || !ch_grad_valid(b) { return []; }
+    if len(a) > 9223372036854775807-len(b) { return []; }
+    let denom = at([examples],0);
+    let mut merged = buffer_fill(len(a)+len(b),0.0);
+    let mut ia = 0; let mut ib = 0; let mut used = 0;
+    while ia < len(a) || ib < len(b) {
+        let mut key = 9007199254740992.0;
+        if ia < len(a) { key = at(a,ia); }
+        if ib < len(b) && at(b,ib) < key { key = at(b,ib); }
+        let mut sum = 0.0; let mut correction = 0.0;
+        while (ia < len(a) && at(a,ia) == key) || (ib < len(b) && at(b,ib) == key) {
+            let mut value = 0.0;
+            if ia < len(a) && at(a,ia) == key { value = at(a,ia+1); ia += 2; }
+            else { value = at(b,ib+1); ib += 2; }
+            let next = sum+value;
+            if ch_magnitude(sum) >= ch_magnitude(value) { correction += (sum-next)+value; }
+            else { correction += (value-next)+sum; }
+            sum = next;
+        }
+        let mean = (sum+correction)/denom;
+        if !(mean-mean == 0.0) { return []; }
+        merged = buffer_set(merged,used,key);
+        merged = buffer_set(merged,used+1,mean);
+        used += 2;
+    }
+    if used == len(merged) { return merged; }
+    let mut out = buffer_fill(used,0.0); let mut i = 0;
+    while i < used { out = buffer_set(out,i,at(merged,i)); i += 1; }
+    out
+}

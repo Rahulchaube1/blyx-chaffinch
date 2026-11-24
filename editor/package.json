@@ -1,8 +1,8 @@
 {
   "name": "blyx-chaffinch",
   "displayName": "Blyx Chaffinch",
-  "description": "Reconcile sorted collection snapshots without materializing their union.",
-  "version": "0.1.0",
+  "description": "Run the Chaffinch workflow and merge sparse gradients from training workers in Blyx.",
+  "version": "0.2.0",
   "publisher": "RahulChaube",
   "license": "(MIT OR Apache-2.0)",
   "icon": "logo.png",
@@ -40,7 +40,7 @@
       {
         "id": "chaffinch.start",
         "title": "Get started with Chaffinch",
-        "description": "Reconcile sorted collection snapshots without materializing their union.",
+        "description": "Run the Chaffinch workflow and merge sparse gradients from training workers in Blyx.",
         "steps": [
           {
             "id": "run",
@@ -48,6 +48,14 @@
             "description": "Create an empty .blyx file, insert blyx-chaffinch-demo and choose **Blyx: Run File**.\n[Open the documentation](https://www.blyx-lang.space/packages/chaffinch)",
             "media": {
               "markdown": "walkthrough.md"
+            }
+          },
+          {
+            "id": "scale",
+            "title": "Merge sparse gradients",
+            "description": "Extract the starter. With the documented compiler revision installed, run the scale example task.\n[Open the experiment](https://www.blyx-lang.space/articles/training-in-factors)",
+            "media": {
+              "markdown": "scale.md"
             }
           }
         ]

@@ -1,0 +1,10 @@
+use vendor::chaffinch::gradients;
+
+fn main() {
+    let a = [7,1.0e16,7,1,2000000000000,8];
+    let b = [7,-1.0e16,31,4];
+    let means = chaffinch_gradient_mean(a,b,4);
+    println!(at(means,1));
+    println!(at(means,3));
+    println!(at(means,5));
+}

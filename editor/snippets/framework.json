@@ -231,5 +231,22 @@
     "prefix": "blyx-chaffinch-chaffinch_reconcile",
     "body": "chaffinch_reconcile(${1:old}, ${2:fresh})$0",
     "description": "Returns [added unique keys, removed unique keys, retained keys, duplicate occurrences in the new snapshot]. Inputs are sorted, allowing forward-only scans."
+  },
+  "Chaffinch — Merge sparse gradients": {
+    "prefix": "blyx-chaffinch-scale",
+    "isFileTemplate": true,
+    "body": [
+      "use vendor::chaffinch::gradients;",
+      "",
+      "fn main() {",
+      "    let a = [7,1.0e16,7,1,2000000000000,8];",
+      "    let b = [7,-1.0e16,31,4];",
+      "    let means = chaffinch_gradient_mean(a,b,4);",
+      "    println!(at(means,1));",
+      "    println!(at(means,3));",
+      "    println!(at(means,5));",
+      "}"
+    ],
+    "description": "Run inside the Chaffinch starter using the pinned native compiler."
   }
 }
